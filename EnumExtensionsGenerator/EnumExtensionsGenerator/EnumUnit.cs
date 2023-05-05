@@ -89,13 +89,13 @@ public static class {{ClassName}}
     {{_accessibility.ToCode()}} static IReadOnlyList<{{Fullname}}> Values => _values;
     {{_accessibility.ToCode()}} static IReadOnlyList<string> Names => _names;
 
-    private static {{Fullname}}[] _values = new []{
+    private static readonly {{Fullname}}[] _values = new []{
     {{
     string.Join(",\n        ", _members.Select(MakeMemberFullName))
     }}
     };
 
-    private static string[] _names = new []{
+    private static readonly string[] _names = new []{
     {{
     string.Join(",\n        ", _members.Select(x => MakeMemberFullName(x).SurroundWithNameOf()))
     }}
