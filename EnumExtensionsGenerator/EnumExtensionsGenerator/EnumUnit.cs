@@ -84,6 +84,7 @@ public static class {{ClassName}}
     private string MakeValues()
     {
         return $$"""
+    public const int MembersCount = {{_members.Count}};
     {{_accessibility.ToCode()}} static ReadOnlySpan<{{Fullname}}> ValuesSpan => _values;
     {{_accessibility.ToCode()}} static ReadOnlySpan<string> NamesSpan => _names;
     {{_accessibility.ToCode()}} static IReadOnlyList<{{Fullname}}> Values => _values;
