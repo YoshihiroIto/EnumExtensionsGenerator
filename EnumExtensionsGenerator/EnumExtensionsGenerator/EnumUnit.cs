@@ -70,11 +70,11 @@ public static class {{ClassName}}
 {{MakeMethod(declIsDefinedValue, (x, y) => $"{y}: return true", defaultCase: "return false")}}
 {{MakeMethod(declTryParse,
     (x, _) => $"nameof({x}): value = {x}; return true",
-    inputName: "name",
+    inputValueName: "name",
     defaultCase: "value = default; return false")}}
 {{MakeMethod(declTryParseIgnoreCase,
-    (x, _) => $$"""{ } s when s.Equals(nameof({{x}}), StringComparison.OrdinalIgnoreCase): value = {{x}}; return true""",
-    inputName: "name",
+    (x, _) => $$"""{ } when name.Equals(nameof({{x}}), StringComparison.OrdinalIgnoreCase): value = {{x}}; return true""",
+    inputValueName: "name",
     defaultCase: "value = default; return false")}}
 {{MakeValues()}}
 }
@@ -116,13 +116,13 @@ public static class {{ClassName}}
     }
 
     private string MakeMethod(string decl, Func<string, object?, string> line,
-        string inputName = "value",
+        string inputValueName = "value",
         string defaultCase = "throw new ArgumentOutOfRangeException()")
     {
         return $$"""
     {{_accessibility.ToCode()}} static {{decl}}
     {
-        switch ({{inputName}})
+        switch ({{inputValueName}})
         {
 {{ForEachMembers(line)}}
             default: {{defaultCase}};
