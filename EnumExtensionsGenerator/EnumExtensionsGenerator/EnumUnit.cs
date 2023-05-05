@@ -85,22 +85,33 @@ public static class {{ClassName}}
     {
         return $$"""
     public const int MembersCount = {{_members.Count}};
-    {{_accessibility.ToCode()}} static ReadOnlySpan<{{Fullname}}> ValuesSpan => _values;
-    {{_accessibility.ToCode()}} static ReadOnlySpan<string> NamesSpan => _names;
-    {{_accessibility.ToCode()}} static IReadOnlyList<{{Fullname}}> Values => _values;
-    {{_accessibility.ToCode()}} static IReadOnlyList<string> Names => _names;
+    {{_accessibility.ToCode()}} static ReadOnlySpan<{{Fullname}}> ValuesSpan => _values ??= NewValues();
+    {{_accessibility.ToCode()}} static ReadOnlySpan<string> NamesSpan => _names ??= NewNames();
+    {{_accessibility.ToCode()}} static IReadOnlyList<{{Fullname}}> Values => _values ??= NewValues();
+    {{_accessibility.ToCode()}} static IReadOnlyList<string> Names => _names ??= NewNames();
 
-    private static readonly {{Fullname}}[] _values = new []{
-    {{
-    string.Join(",\n        ", _members.Select(MakeMemberFullName))
-    }}
-    };
+    private static {{Fullname}}[]? _values;
+    private static string[]? _names;
 
-    private static readonly string[] _names = new []{
-    {{
-    string.Join(",\n        ", _members.Select(x => MakeMemberFullName(x).SurroundWithNameOf()))
-    }}
-    };
+    private static {{Fullname}}[] NewValues()
+    {
+        return new[]
+        {
+        {{
+                string.Join(",\n            ", _members.Select(MakeMemberFullName))
+        }}
+        };
+    }
+
+    private static string[] NewNames()
+    {
+        return new[]
+        {
+        {{
+                string.Join(",\n            ", _members.Select(x => MakeMemberFullName(x).SurroundWithNameOf()))
+        }}
+        };
+    }
 """;
     }
 
