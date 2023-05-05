@@ -10,9 +10,9 @@ internal sealed class EnumUnit
             ? $"{_namespace}_{_name}_EnumExtensions.g.cs"
             : $"{_name}_EnumExtensions.g.cs";
 
-    public string ClassName => $"{_name}Extensions";
+    private string ClassName => $"{_name}Extensions";
 
-    public string Fullname =>
+    private string Fullname =>
         HasNamespace
             ? $"{_namespace}.{_name}"
             : _name;
@@ -24,6 +24,21 @@ internal sealed class EnumUnit
     private readonly IReadOnlyList<Member> _members;
 
     private bool HasNamespace => _namespace != "";
+    
+    public static EnumUnit Create(INamedTypeSymbol enumSymbol)
+    {
+        var name = enumSymbol.Name;
+        var @namespace = enumSymbol.ContainingNamespace.IsGlobalNamespace
+            ? ""
+            : enumSymbol.ContainingNamespace.ToString();
+        var baseType = enumSymbol.EnumUnderlyingType?.Name ?? "int";
+        var units = enumSymbol.GetMembers()
+            .Where(x => x is IFieldSymbol { ConstantValue: not null })
+            .Select(x => new Member(x.Name, ((IFieldSymbol)x).ConstantValue))
+            .ToArray();
+
+        return new(name, @namespace, baseType, enumSymbol.DeclaredAccessibility, units);
+    }
 
     public string ToSourceCode()
     {
@@ -129,22 +144,7 @@ public static class {{ClassName}}
         _members = members;
     }
 
-    public static EnumUnit Create(INamedTypeSymbol enumSymbol)
-    {
-        var name = enumSymbol.Name;
-        var @namespace = enumSymbol.ContainingNamespace.IsGlobalNamespace
-            ? ""
-            : enumSymbol.ContainingNamespace.ToString();
-        var baseType = enumSymbol.EnumUnderlyingType?.Name ?? "int";
-        var units = enumSymbol.GetMembers()
-            .Where(x => x is IFieldSymbol { ConstantValue: not null })
-            .Select(x => new Member(x.Name, ((IFieldSymbol)x).ConstantValue))
-            .ToArray();
-
-        return new(name, @namespace, baseType, enumSymbol.DeclaredAccessibility, units);
-    }
-
-    public sealed class Member
+    private sealed class Member
     {
         public readonly string Name;
         public readonly object? Value;

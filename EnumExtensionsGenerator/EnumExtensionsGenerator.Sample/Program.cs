@@ -1,5 +1,6 @@
 ﻿using EnumExtensionsGenerator;
 using EnumExtensionsGenerator.Sample;
+using System;
 
 var material = Material.Water;
 Console.WriteLine(material.ToName());
