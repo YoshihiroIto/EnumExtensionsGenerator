@@ -30,9 +30,9 @@ internal sealed class EnumUnit
         var namespaceLine = HasNamespace ? $"namespace {_namespace};" : "";
 
         var declToName = $"string ToName(this {Fullname} value)";
+        var declToNumber = $"{_baseType} ToNumber(this {Fullname} value)";
         var declIsDefinedName = "bool IsDefined(string value)";
         var declIsDefinedValue = $"bool IsDefined({_baseType} value)";
-        var declToNumber = $"{_baseType} ToNumber({Fullname} value)";
         var declTryParse = $"bool TryParse(string name, out {Fullname} value)";
         var declTryParseIgnoreCase = $"bool TryParseIgnoreCase(string name, out {Fullname} value)";
 
@@ -46,9 +46,9 @@ using System.Diagnostics.CodeAnalysis;
 public static class {{ClassName}}
 {
 {{MakeMethod(declToName, (x, _) => $"{x}: return nameof({x})")}}
+{{MakeMethod(declToNumber, (x, y) => $"{x}: return {y}")}}
 {{MakeMethod(declIsDefinedName, (x, _) => $"nameof({x}): return true", defaultCase: "return false")}}
 {{MakeMethod(declIsDefinedValue, (x, y) => $"{y}: return true", defaultCase: "return false")}}
-{{MakeMethod(declToNumber, (x, y) => $"{x}: return {y}")}}
 {{MakeMethod(declTryParse,
     (x, _) => $"nameof({x}): value = {x}; return true",
     inputName: "name",
