@@ -8,20 +8,6 @@ public class EnumGenerator : IIncrementalGenerator
 {
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
-        context.RegisterPostInitializationOutput(static context =>
-        {
-            context.AddSource("EnumExtensionsAttribute.g.cs", """
-namespace EnumExtensionsGenerator;
-
-using System;
-
-[AttributeUsage(AttributeTargets.Enum)]
-internal sealed class EnumExtensionsAttribute : Attribute
-{
-}
-""");
-        });
-
         var source = context.SyntaxProvider.ForAttributeWithMetadataName(
             "EnumExtensionsGenerator.EnumExtensionsAttribute",
             predicate: static (node, _) => node is EnumDeclarationSyntax,
