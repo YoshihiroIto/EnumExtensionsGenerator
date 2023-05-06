@@ -5,17 +5,17 @@ namespace EnumExtensionsGenerator.Benchmarks.Scenarios;
 
 [MemoryDiagnoser]
 [ShortRunJob]
-public class GetNameBenchmark
+public class SequentialEnum_GetNameBenchmark
 {
-    private const Fruits Value = Fruits.Pineapple;
+    private const SequentialEnum Value = SequentialEnum.K;
     
     [GlobalSetup]
     public void Setup()
     {
-        _ = Enum.GetNames<Fruits>();
-        _ = Enums.GetNames<Fruits>();
-        _ = FastEnumUtility.FastEnum.GetNames<Fruits>();
-        _ = FruitsExtensions.NamesSpan;
+        _ = Enum.GetNames<SequentialEnum>();
+        _ = Enums.GetNames<SequentialEnum>();
+        _ = FastEnumUtility.FastEnum.GetNames<SequentialEnum>();
+        _ = SequentialEnumExtensions.NamesSpan;
     }
     
     [Benchmark(Baseline = true)]
@@ -32,5 +32,5 @@ public class GetNameBenchmark
     
     [Benchmark]
     public string EnumExtensions()
-        => FruitsExtensions.ToName(Value);
+        => SequentialEnumExtensions.ToName(Value);
 }
