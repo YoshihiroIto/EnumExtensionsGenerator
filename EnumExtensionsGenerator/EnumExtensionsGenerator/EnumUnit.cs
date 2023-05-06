@@ -82,6 +82,13 @@ public static class {{ClassName}}
         var declTryParseIgnoreCase = $"bool TryParseIgnoreCase(ReadOnlySpan<char> name, out {Fullname} value)";
 
         return $$"""
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static {{_baseType}} ToConstant(this {{Fullname}} value)
+    {
+        var i = Unsafe.As<{{Fullname}}, {{_baseType}}>(ref value);
+        return i;
+    }
+
 {{MakeMethod(declIsDefinedName, (x, _) => $"nameof({x}): return true", inputValueName: "name", defaultCase: "return false")}}
 {{MakeMethod(declParse,
     (x, _) => $"nameof({x}): return {x}",
@@ -111,13 +118,6 @@ public static class {{ClassName}}
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static {{_baseType}} ToConstant(this {{Fullname}} value)
-    {
-        var i = Unsafe.As<{{Fullname}}, {{_baseType}}>(ref value);
-        return i;
-    }
-
-    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsDefined({{_baseType}} constants)
     {
         if (constants < 0)
@@ -143,13 +143,11 @@ public static class {{ClassName}}
     private string ToSourceCodeUnsequential()
     {
         var declToName = $"string ToName(this {Fullname} value)";
-        var declToConstant = $"{_baseType} ToConstant(this {Fullname} value)";
         var declIsDefinedConstant = $"bool IsDefined({_baseType} constant)";
         var declIsDefinedValue = $"bool IsDefined({Fullname} value)";
 
         return $$"""
 {{MakeMethod(declToName, (x, _) => $"{x}: return nameof({x})")}}
-{{MakeMethod(declToConstant, (x, y) => $"{x}: return {y}")}}
 {{MakeMethod(declIsDefinedConstant, (x, y) => $"{y}: return true", inputValueName: "constant", defaultCase: "return false")}}
 {{MakeMethod(declIsDefinedValue, (x, _) => $"{x}: return true", defaultCase: "return false")}}
 {{MakeValuesUnsequential()}}
