@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumExtensionsGenerator.Sam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumExtensionsGenerator.Attributes", "EnumExtensionsGenerator.Attributes\EnumExtensionsGenerator.Attributes.csproj", "{1B33A9D5-4331-48B6-8B18-8E5B07969764}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EnumExtensionsGenerator.Benchmarks", "EnumExtensionsGenerator.Benchmarks\EnumExtensionsGenerator.Benchmarks.csproj", "{6D9AF8E8-E1C8-46F4-874E-21D5C888D565}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{1B33A9D5-4331-48B6-8B18-8E5B07969764}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B33A9D5-4331-48B6-8B18-8E5B07969764}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B33A9D5-4331-48B6-8B18-8E5B07969764}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D9AF8E8-E1C8-46F4-874E-21D5C888D565}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D9AF8E8-E1C8-46F4-874E-21D5C888D565}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D9AF8E8-E1C8-46F4-874E-21D5C888D565}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D9AF8E8-E1C8-46F4-874E-21D5C888D565}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
