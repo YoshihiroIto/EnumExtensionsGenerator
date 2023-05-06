@@ -47,6 +47,13 @@ public sealed class EnumExtensionsTests
     }
 
     [Fact]
+    public void IsDefinedByValue()
+    {
+        Assert.True(ColorExtensions.IsDefined(Color.Blue));
+        Assert.False(ColorExtensions.IsDefined((Color)999));
+    }
+
+    [Fact]
     public void TryParse()
     {
         Assert.True(ColorExtensions.TryParse("White", out var white0));
