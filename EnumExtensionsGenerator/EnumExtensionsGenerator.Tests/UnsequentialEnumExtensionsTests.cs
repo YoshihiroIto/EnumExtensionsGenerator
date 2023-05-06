@@ -12,7 +12,7 @@ public enum Color
     White
 }
 
-public sealed class EnumExtensionsTests
+public sealed class UnsequentialEnumExtensionsTests
 {
     [Fact]
     public void ToName()
