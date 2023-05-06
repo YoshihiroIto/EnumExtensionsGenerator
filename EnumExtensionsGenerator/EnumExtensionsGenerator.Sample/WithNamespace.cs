@@ -25,3 +25,13 @@ public enum Fruits
     Melon = 4,
     Banana = 8,
 }
+
+public class TestClass
+{
+    [EnumExtensions]
+    public enum City2 : byte
+    {
+        Tokyo,
+        Osaka,
+    }
+}

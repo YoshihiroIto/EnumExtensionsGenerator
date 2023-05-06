@@ -13,7 +13,7 @@ internal sealed class EnumUnit
             ? $"{_namespace}_{_name}_EnumExtensions.g.cs"
             : $"{_name}_EnumExtensions.g.cs";
 
-    private string ClassName => $"{_name}Extensions";
+    private string ClassName => $"{_name.Replace('.', '_')}Extensions";
 
     private string Fullname =>
         HasNamespace
@@ -30,10 +30,14 @@ internal sealed class EnumUnit
     
     public static EnumUnit Create(INamedTypeSymbol enumSymbol)
     {
-        var name = enumSymbol.Name;
         var @namespace = enumSymbol.ContainingNamespace.IsGlobalNamespace
             ? ""
             : enumSymbol.ContainingNamespace.ToString();
+        
+        var name = 
+            @namespace == "" ? enumSymbol.ConstructedFrom.ToString() :
+            enumSymbol.ConstructedFrom.ToString().Substring(@namespace.Length + 1);
+        
         var baseType = enumSymbol.EnumUnderlyingType?.Name ?? "int";
         var units = enumSymbol.GetMembers()
             .Where(x => x is IFieldSymbol { ConstantValue: not null })
