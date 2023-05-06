@@ -87,11 +87,14 @@ public static class {{ClassName}}
     public const int MembersCount = {{_members.Count}};
     {{_accessibility.ToCode()}} static ReadOnlySpan<{{Fullname}}> ValuesSpan => _values ??= NewValues();
     {{_accessibility.ToCode()}} static ReadOnlySpan<string> NamesSpan => _names ??= NewNames();
+    {{_accessibility.ToCode()}} static ReadOnlySpan<{{_baseType}}> NumbersSpan => _numbers ??= NewNumbers();
     {{_accessibility.ToCode()}} static IReadOnlyList<{{Fullname}}> Values => _values ??= NewValues();
     {{_accessibility.ToCode()}} static IReadOnlyList<string> Names => _names ??= NewNames();
+    {{_accessibility.ToCode()}} static IReadOnlyList<{{_baseType}}> Numbers => _numbers ??= NewNumbers();
 
     private static {{Fullname}}[]? _values;
     private static string[]? _names;
+    private static {{_baseType}}[]? _numbers;
 
     private static {{Fullname}}[] NewValues()
     {
@@ -109,6 +112,16 @@ public static class {{ClassName}}
         {
         {{
                 string.Join(",\n            ", _members.Select(x => MakeMemberFullName(x).SurroundWithNameOf()))
+        }}
+        };
+    }
+
+    private static {{_baseType}}[] NewNumbers()
+    {
+        return new[]
+        {
+        {{
+                string.Join(",\n            ", _members.Select(x => x.Value))
         }}
         };
     }

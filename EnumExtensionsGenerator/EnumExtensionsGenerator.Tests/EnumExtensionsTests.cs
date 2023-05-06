@@ -107,4 +107,24 @@ public sealed class EnumExtensionsTests
         Assert.Equal("Yellow", ColorExtensions.Names[3]);
         Assert.Equal("White", ColorExtensions.Names[4]);
     }
+
+    [Fact]
+    public void NumbersSpan()
+    {
+        Assert.Equal(10, ColorExtensions.NumbersSpan[0]);
+        Assert.Equal(20, ColorExtensions.NumbersSpan[1]);
+        Assert.Equal(21, ColorExtensions.NumbersSpan[2]);
+        Assert.Equal(22, ColorExtensions.NumbersSpan[3]);
+        Assert.Equal(23, ColorExtensions.NumbersSpan[4]);
+    }
+
+    [Fact]
+    public void Numbers()
+    {
+        Assert.Equal(10, ColorExtensions.Numbers[0]);
+        Assert.Equal(20, ColorExtensions.Numbers[1]);
+        Assert.Equal(21, ColorExtensions.Numbers[2]);
+        Assert.Equal(22, ColorExtensions.Numbers[3]);
+        Assert.Equal(23, ColorExtensions.Numbers[4]);
+    }
 }
