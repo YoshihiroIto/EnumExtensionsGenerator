@@ -53,7 +53,7 @@ internal sealed class EnumUnit
         var namespaceLine = HasNamespace ? $"namespace {_namespace};" : "";
 
         var declToName = $"string ToName(this {Fullname} value)";
-        var declToNumber = $"{_baseType} ToNumber(this {Fullname} value)";
+        var declToConstant = $"{_baseType} ToConstant(this {Fullname} value)";
         var declIsDefinedName = "bool IsDefined(ReadOnlySpan<char> name)";
         var declIsDefinedValue = $"bool IsDefined({_baseType} value)";
         var declTryParse = $"bool TryParse(ReadOnlySpan<char> name, out {Fullname} value)";
@@ -70,7 +70,7 @@ using System.Diagnostics.CodeAnalysis;
 public static class {{ClassName}}
 {
 {{MakeMethod(declToName, (x, _) => $"{x}: return nameof({x})")}}
-{{MakeMethod(declToNumber, (x, y) => $"{x}: return {y}")}}
+{{MakeMethod(declToConstant, (x, y) => $"{x}: return {y}")}}
 {{MakeMethod(declIsDefinedName, (x, _) => $"nameof({x}): return true", inputValueName: "name", defaultCase: "return false")}}
 {{MakeMethod(declIsDefinedValue, (x, y) => $"{y}: return true", defaultCase: "return false")}}
 {{MakeMethod(declTryParse,
@@ -92,14 +92,14 @@ public static class {{ClassName}}
     public const int MembersCount = {{_members.Count}};
     {{_accessibility.ToCode()}} static ReadOnlySpan<{{Fullname}}> ValuesSpan => _values ??= NewValues();
     {{_accessibility.ToCode()}} static ReadOnlySpan<string> NamesSpan => _names ??= NewNames();
-    {{_accessibility.ToCode()}} static ReadOnlySpan<{{_baseType}}> NumbersSpan => _numbers ??= NewNumbers();
+    {{_accessibility.ToCode()}} static ReadOnlySpan<{{_baseType}}> ConstantsSpan => _constants ??= NewConstants();
     {{_accessibility.ToCode()}} static IReadOnlyList<{{Fullname}}> Values => _values ??= NewValues();
     {{_accessibility.ToCode()}} static IReadOnlyList<string> Names => _names ??= NewNames();
-    {{_accessibility.ToCode()}} static IReadOnlyList<{{_baseType}}> Numbers => _numbers ??= NewNumbers();
+    {{_accessibility.ToCode()}} static IReadOnlyList<{{_baseType}}> Constants => _constants ??= NewConstants();
 
     private static {{Fullname}}[]? _values;
     private static string[]? _names;
-    private static {{_baseType}}[]? _numbers;
+    private static {{_baseType}}[]? _constants;
 
     private static {{Fullname}}[] NewValues()
     {
@@ -121,7 +121,7 @@ public static class {{ClassName}}
         };
     }
 
-    private static {{_baseType}}[] NewNumbers()
+    private static {{_baseType}}[] NewConstants()
     {
         return new {{_baseType}}[]
         {

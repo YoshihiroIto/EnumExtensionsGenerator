@@ -24,12 +24,12 @@ public sealed class EnumExtensionsTests
     }
 
     [Fact]
-    public void ToNumber()
+    public void ToConstant()
     {
         var color = Color.Red;
 
-        Assert.Equal(10, color.ToNumber());
-        Assert.Equal(23, Color.White.ToNumber());
+        Assert.Equal(10, color.ToConstant());
+        Assert.Equal(23, Color.White.ToConstant());
     }
 
     [Fact]
@@ -40,7 +40,7 @@ public sealed class EnumExtensionsTests
     }
 
     [Fact]
-    public void IsDefinedByNumber()
+    public void IsDefinedByConstant()
     {
         Assert.True(ColorExtensions.IsDefined(10));
         Assert.False(ColorExtensions.IsDefined(999));
@@ -109,22 +109,22 @@ public sealed class EnumExtensionsTests
     }
 
     [Fact]
-    public void NumbersSpan()
+    public void ConstantsSpan()
     {
-        Assert.Equal(10, ColorExtensions.NumbersSpan[0]);
-        Assert.Equal(20, ColorExtensions.NumbersSpan[1]);
-        Assert.Equal(21, ColorExtensions.NumbersSpan[2]);
-        Assert.Equal(22, ColorExtensions.NumbersSpan[3]);
-        Assert.Equal(23, ColorExtensions.NumbersSpan[4]);
+        Assert.Equal(10, ColorExtensions.ConstantsSpan[0]);
+        Assert.Equal(20, ColorExtensions.ConstantsSpan[1]);
+        Assert.Equal(21, ColorExtensions.ConstantsSpan[2]);
+        Assert.Equal(22, ColorExtensions.ConstantsSpan[3]);
+        Assert.Equal(23, ColorExtensions.ConstantsSpan[4]);
     }
 
     [Fact]
-    public void Numbers()
+    public void Constants()
     {
-        Assert.Equal(10, ColorExtensions.Numbers[0]);
-        Assert.Equal(20, ColorExtensions.Numbers[1]);
-        Assert.Equal(21, ColorExtensions.Numbers[2]);
-        Assert.Equal(22, ColorExtensions.Numbers[3]);
-        Assert.Equal(23, ColorExtensions.Numbers[4]);
+        Assert.Equal(10, ColorExtensions.Constants[0]);
+        Assert.Equal(20, ColorExtensions.Constants[1]);
+        Assert.Equal(21, ColorExtensions.Constants[2]);
+        Assert.Equal(22, ColorExtensions.Constants[3]);
+        Assert.Equal(23, ColorExtensions.Constants[4]);
     }
 }
