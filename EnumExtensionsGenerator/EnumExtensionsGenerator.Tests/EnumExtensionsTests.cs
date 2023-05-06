@@ -56,17 +56,17 @@ public sealed class EnumExtensionsTests
     [Fact]
     public void TryParse()
     {
-        Assert.True(ColorExtensions.TryParse("White", out var white0));
-        Assert.Equal(Color.White, white0);
+        Assert.True(ColorExtensions.TryParse("White", out var white));
+        Assert.Equal(Color.White, white);
 
-        Assert.False(ColorExtensions.TryParse("WHITE", out var white1));
+        Assert.False(ColorExtensions.TryParse("WHITE", out _));
     }
 
     [Fact]
     public void TryParseIgnoreCase()
     {
-        Assert.True(ColorExtensions.TryParseIgnoreCase("WHITE", out var white0));
-        Assert.Equal(Color.White, white0);
+        Assert.True(ColorExtensions.TryParseIgnoreCase("WHITE", out var white));
+        Assert.Equal(Color.White, white);
     }
 
     [Fact]
