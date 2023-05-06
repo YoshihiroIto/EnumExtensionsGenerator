@@ -23,6 +23,7 @@ internal sealed class EnumUnit
     private readonly string _name;
     private readonly string _namespace;
     private readonly string _baseType;
+    private readonly string _unsignedBaseType;
     private readonly Accessibility _accessibility;
     private readonly IReadOnlyList<Member> _members;
     private readonly bool _isSequential;
@@ -118,21 +119,15 @@ public static class {{ClassName}}
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public static bool IsDefined({{_baseType}} constants)
+    public static bool IsDefined({{_baseType}} constant)
     {
-        if (constants < 0)
-            return false;
-        if (constants >= MembersCount)
-            return false;
-        
-        return true;
+        return ({{_unsignedBaseType}})constant < ({{_unsignedBaseType}})MembersCount;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool IsDefined({{Fullname}} value)
     {
         var i = Unsafe.As<{{Fullname}}, {{_baseType}}>(ref value);
-        
         return IsDefined(i);
     }
 
@@ -270,11 +265,12 @@ private static {{Fullname}}[] NewValues()
         _name = name;
         _namespace = @namespace;
         _baseType = baseType;
+        _unsignedBaseType = Helper.ToUnsignedType(baseType);
         _accessibility = accessibility;
         _members = members;
         _isSequential = IsSequential(members, _baseType);
     }
-
+    
     private static bool IsSequential(IReadOnlyList<Member> members, string baseType)
     {
         for (var i = 0; i != members.Count; ++i)
@@ -283,31 +279,11 @@ private static {{Fullname}}[] NewValues()
             if (v is null)
                 throw new NotImplementedException();
 
-            if (IsEqual(i, v, baseType) == false)
+            if (Helper.IsEqual(i, v, baseType) == false)
                 return false;
         }
 
         return true;
-    }
-
-    private static bool IsEqual(int i, object o, string typeName)
-    {
-        // ReSharper disable BuiltInTypeReferenceStyle
-        // ReSharper disable RedundantCast
-        return typeName switch
-        {
-            nameof(Byte) => (Byte)i == (Byte)o,
-            nameof(SByte) => (SByte)i == (SByte)o,
-            nameof(Int16) => (Int16)i == (Int16)o,
-            nameof(UInt16) => (UInt16)i == (UInt16)o,
-            nameof(Int32) => (Int32)i == (Int32)o,
-            nameof(UInt32) => (UInt32)i == (UInt32)o,
-            nameof(Int64) => (Int64)i == (Int64)o,
-            nameof(UInt64) => (UInt64)i == (UInt64)o,
-            _ => throw new NotImplementedException()
-        };
-        // ReSharper restore RedundantCast
-        // ReSharper restore BuiltInTypeReferenceStyle
     }
 
     private sealed class Member
