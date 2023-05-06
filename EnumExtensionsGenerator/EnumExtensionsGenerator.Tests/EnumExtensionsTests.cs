@@ -52,6 +52,21 @@ public sealed class EnumExtensionsTests
         Assert.True(ColorExtensions.IsDefined(Color.Blue));
         Assert.False(ColorExtensions.IsDefined((Color)999));
     }
+    
+    [Fact]
+    public void Parse()
+    {
+        Assert.Equal(Color.White, ColorExtensions.Parse("White"));
+        Assert.Throws<ArgumentOutOfRangeException>(() => ColorExtensions.Parse("WHITE"));
+    }
+    
+    [Fact]
+    public void ParseIgnoreCase()
+    {
+        Assert.Equal(Color.White, ColorExtensions.ParseIgnoreCase("White"));
+        Assert.Equal(Color.White, ColorExtensions.ParseIgnoreCase("WHITE"));
+        Assert.Throws<ArgumentOutOfRangeException>(() => ColorExtensions.Parse("abc"));
+    }
 
     [Fact]
     public void TryParse()

@@ -57,6 +57,8 @@ internal sealed class EnumUnit
         var declIsDefinedName = "bool IsDefined(ReadOnlySpan<char> name)";
         var declIsDefinedConstant = $"bool IsDefined({_baseType} constant)";
         var declIsDefinedValue = $"bool IsDefined({Fullname} value)";
+        var declParse = $"{Fullname} Parse(ReadOnlySpan<char> name)";
+        var declParseIgnoreCase = $"{Fullname} ParseIgnoreCase(ReadOnlySpan<char> name)";
         var declTryParse = $"bool TryParse(ReadOnlySpan<char> name, out {Fullname} value)";
         var declTryParseIgnoreCase = $"bool TryParseIgnoreCase(ReadOnlySpan<char> name, out {Fullname} value)";
 
@@ -75,6 +77,12 @@ public static class {{ClassName}}
 {{MakeMethod(declIsDefinedName, (x, _) => $"nameof({x}): return true", inputValueName: "name", defaultCase: "return false")}}
 {{MakeMethod(declIsDefinedConstant, (x, y) => $"{y}: return true", inputValueName: "constant", defaultCase: "return false")}}
 {{MakeMethod(declIsDefinedValue, (x, _) => $"{x}: return true", defaultCase: "return false")}}
+{{MakeMethod(declParse,
+    (x, _) => $"nameof({x}): return {x}",
+    inputValueName: "name")}}
+{{MakeMethod(declParseIgnoreCase,
+    (x, _) => $$"""{ } when name.Equals(nameof({{x}}), StringComparison.OrdinalIgnoreCase): return {{x}}""",
+    inputValueName: "name" )}}
 {{MakeMethod(declTryParse,
     (x, _) => $"nameof({x}): value = {x}; return true",
     inputValueName: "name",
