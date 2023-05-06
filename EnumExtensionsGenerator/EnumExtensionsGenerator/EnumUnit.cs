@@ -55,7 +55,7 @@ internal sealed class EnumUnit
         var declToName = $"string ToName(this {Fullname} value)";
         var declToConstant = $"{_baseType} ToConstant(this {Fullname} value)";
         var declIsDefinedName = "bool IsDefined(ReadOnlySpan<char> name)";
-        var declIsDefinedValue = $"bool IsDefined({_baseType} value)";
+        var declIsDefinedConstant = $"bool IsDefined({_baseType} constant)";
         var declTryParse = $"bool TryParse(ReadOnlySpan<char> name, out {Fullname} value)";
         var declTryParseIgnoreCase = $"bool TryParseIgnoreCase(ReadOnlySpan<char> name, out {Fullname} value)";
 
@@ -72,7 +72,7 @@ public static class {{ClassName}}
 {{MakeMethod(declToName, (x, _) => $"{x}: return nameof({x})")}}
 {{MakeMethod(declToConstant, (x, y) => $"{x}: return {y}")}}
 {{MakeMethod(declIsDefinedName, (x, _) => $"nameof({x}): return true", inputValueName: "name", defaultCase: "return false")}}
-{{MakeMethod(declIsDefinedValue, (x, y) => $"{y}: return true", defaultCase: "return false")}}
+{{MakeMethod(declIsDefinedConstant, (x, y) => $"{y}: return true", inputValueName: "constant", defaultCase: "return false")}}
 {{MakeMethod(declTryParse,
     (x, _) => $"nameof({x}): value = {x}; return true",
     inputValueName: "name",
