@@ -114,7 +114,7 @@ public static class {{ClassName}}
     public static {{_baseType}} ToConstant(this {{Fullname}} value)
     {
         var i = Unsafe.As<{{Fullname}}, {{_baseType}}>(ref value);
-        return _constants[i];
+        return i;
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
