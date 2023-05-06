@@ -98,7 +98,7 @@ public static class {{ClassName}}
 
     private static {{Fullname}}[] NewValues()
     {
-        return new[]
+        return new {{Fullname}}[]
         {
         {{
                 string.Join(",\n            ", _members.Select(MakeMemberFullName))
@@ -108,7 +108,7 @@ public static class {{ClassName}}
 
     private static string[] NewNames()
     {
-        return new[]
+        return new string[]
         {
         {{
                 string.Join(",\n            ", _members.Select(x => MakeMemberFullName(x).SurroundWithNameOf()))
@@ -118,7 +118,7 @@ public static class {{ClassName}}
 
     private static {{_baseType}}[] NewNumbers()
     {
-        return new[]
+        return new {{_baseType}}[]
         {
         {{
                 string.Join(",\n            ", _members.Select(x => x.Value))
