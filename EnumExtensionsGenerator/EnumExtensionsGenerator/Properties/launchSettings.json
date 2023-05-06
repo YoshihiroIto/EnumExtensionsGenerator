@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "EnumExtensionsGenerator": {
+      "commandName": "Project"
+    },
+    "プロファイル 1": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\EnumExtensionsGenerator.Sample\\EnumExtensionsGenerator.Sample.csproj"
+    }
+  }
+}
