@@ -10,10 +10,10 @@ internal sealed class EnumUnit
 {
     public string Filename =>
         HasNamespace
-            ? $"{_namespace}_{_name}_EnumExtensions.g.cs"
+            ? $"{_namespace.ToFilename()}_{_name.ToFilename()}_EnumExtensions.g.cs"
             : $"{_name}_EnumExtensions.g.cs";
 
-    private string ClassName => $"{_name.Replace('.', '_')}Extensions";
+    private string ClassName => $"{_name.ToFilename()}Extensions";
 
     private string Fullname =>
         HasNamespace

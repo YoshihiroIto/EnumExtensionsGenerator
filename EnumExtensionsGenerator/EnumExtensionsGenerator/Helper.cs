@@ -19,10 +19,15 @@ internal static class Helper
             _ => throw new ArgumentOutOfRangeException()
         };
     }
-    
+
     public static string SurroundWithNameOf(this string src)
     {
         return $"nameof({src})";
+    }
+
+    public static string ToFilename(this string src)
+    {
+        return src.Replace('.', '_');
     }
 
     public static string ToUnsignedType(string type)
@@ -60,5 +65,4 @@ internal static class Helper
         // ReSharper restore RedundantCast
         // ReSharper restore BuiltInTypeReferenceStyle
     }
-    
 }
