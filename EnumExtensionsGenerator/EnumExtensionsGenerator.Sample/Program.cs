@@ -1,6 +1,9 @@
 ﻿using EnumExtensionsGenerator;
 using EnumExtensionsGenerator.Sample;
-using System;
+
+[assembly: ExternalEnumExtensions(Enum = typeof(ConsoleColor))]
+[assembly: ExternalEnumExtensions(Enum = typeof(ConsoleKey))]
+
 
 var material = Material.Water;
 Console.WriteLine(material.ToName());
