@@ -1,7 +1,7 @@
 ﻿using EnumExtensionsGenerator;
 using EnumExtensionsGenerator.Sample;
 
-[assembly: ExternalEnumExtensions(Enum = typeof(ConsoleColor))]
+[assembly: ExternalEnumExtensions(Enum = typeof(ConsoleColor), ExtensionClassNamespace = "AAA_ClassNamespace", ExtensionClassName = "AAA_ClassName")]
 [assembly: ExternalEnumExtensions(Enum = typeof(ConsoleKey))]
 
 
@@ -19,7 +19,7 @@ Console.WriteLine(fruits.ToName());
 
 
 
-[EnumExtensions]
+[EnumExtensions(ExtensionClassNamespace = "Material_ClassNamespace", ExtensionClassName = "Material_ClassName")]
 public enum Material
 {
     Fire,
