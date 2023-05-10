@@ -142,7 +142,7 @@ public static class {{className}}
         return IsDefined(i);
     }
 
-{{MakeValuesSequential()}}
+{{MakeValues()}}
 """;
     }
 
@@ -156,11 +156,11 @@ public static class {{className}}
 {{MakeMethod(declToName, (x, _) => $"{x}: return nameof({x})")}}
 {{MakeMethod(declIsDefinedConstant, (x, y) => $"{y}: return true", inputValueName: "constant", defaultCase: "return false")}}
 {{MakeMethod(declIsDefinedValue, (x, _) => $"{x}: return true", defaultCase: "return false")}}
-{{MakeValuesUnsequential()}}
+{{MakeValues()}}
 """;
     }
 
-    private string MakeValuesSequential()
+    private string MakeValues()
     {
         return $$"""
     public const int MembersCount = {{_members.Count}};
@@ -174,25 +174,6 @@ public static class {{className}}
     private static readonly {{Fullname}}[] _values = NewValues();
     private static readonly string[] _names = NewNames();
     private static readonly {{_baseType}}[] _constants = NewConstants();
-
-    {{MakeNewValues()}}
-""";
-    }
-
-    private string MakeValuesUnsequential()
-    {
-        return $$"""
-    public const int MembersCount = {{_members.Count}};
-    {{_accessibility.ToCode()}} static ReadOnlySpan<{{Fullname}}> ValuesSpan => _values ??= NewValues();
-    {{_accessibility.ToCode()}} static ReadOnlySpan<string> NamesSpan => _names ??= NewNames();
-    {{_accessibility.ToCode()}} static ReadOnlySpan<{{_baseType}}> ConstantsSpan => _constants ??= NewConstants();
-    {{_accessibility.ToCode()}} static IReadOnlyList<{{Fullname}}> Values => _values ??= NewValues();
-    {{_accessibility.ToCode()}} static IReadOnlyList<string> Names => _names ??= NewNames();
-    {{_accessibility.ToCode()}} static IReadOnlyList<{{_baseType}}> Constants => _constants ??= NewConstants();
-
-    private static {{Fullname}}[]? _values;
-    private static string[]? _names;
-    private static {{_baseType}}[]? _constants;
 
     {{MakeNewValues()}}
 """;
