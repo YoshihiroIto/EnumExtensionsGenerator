@@ -3,8 +3,10 @@ using EnumExtensionsGenerator.Benchmarks.Scenarios;
 
 var switcher = new BenchmarkSwitcher(new[]
 {
-    typeof(SequentialEnum_GetNameBenchmark),
-    typeof(UnsequentialEnum_GetNameBenchmark),
+    typeof(SequentialEnum_GetName),
+    typeof(UnsequentialEnum_GetName),
+    typeof(SequentialEnum_IsDefined),
+    typeof(UnsequentialEnum_IsDefined),
 });
 
 switcher.Run(args);

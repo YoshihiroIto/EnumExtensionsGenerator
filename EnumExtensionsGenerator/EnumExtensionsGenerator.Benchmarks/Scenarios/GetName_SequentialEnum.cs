@@ -5,9 +5,9 @@ namespace EnumExtensionsGenerator.Benchmarks.Scenarios;
 
 [MemoryDiagnoser]
 [ShortRunJob]
-public class SequentialEnum_GetNameBenchmark
+public class GetName_SequentialEnum
 {
-    private const SequentialEnum Value = SequentialEnum.K;
+    private static SequentialEnum Value = SequentialEnum.K;
     
     [GlobalSetup]
     public void Setup()

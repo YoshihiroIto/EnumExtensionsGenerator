@@ -5,9 +5,9 @@ namespace EnumExtensionsGenerator.Benchmarks.Scenarios;
 
 [MemoryDiagnoser]
 [ShortRunJob]
-public class UnsequentialEnum_GetNameBenchmark
+public class IsDefined_UnsequentialEnum
 {
-    private const UnsequentialEnum Value = UnsequentialEnum.K;
+    private static UnsequentialEnum Value = UnsequentialEnum.K;
     
     [GlobalSetup]
     public void Setup()
@@ -19,18 +19,18 @@ public class UnsequentialEnum_GetNameBenchmark
     }
     
     [Benchmark(Baseline = true)]
-    public string? DotNet()
-        => Enum.GetName(Value);
+    public bool DotNet()
+        => Enum.IsDefined(Value);
 
     [Benchmark]
-    public string? EnumsNet()
-        => Value.GetName();
+    public bool EnumsNet()
+        => Enums.IsDefined(Value);
 
     [Benchmark]
-    public string? FastEnum()
-        => FastEnumUtility.FastEnum.GetName(Value);
+    public bool FastEnum()
+        => FastEnumUtility.FastEnum.IsDefined(Value);
     
     [Benchmark]
-    public string EnumExtensions()
-        => UnsequentialEnumExtensions.ToName(Value);
+    public bool EnumExtensions()
+        => UnsequentialEnumExtensions.IsDefined(Value);
 }

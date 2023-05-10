@@ -1,5 +1,6 @@
 ﻿using EnumExtensionsGenerator;
 using EnumExtensionsGenerator.Sample;
+using Material_ClassNamespace;
 
 [assembly: ExternalEnumExtensions(Enum = typeof(ConsoleColor), ExtensionClassNamespace = "AAA_ClassNamespace", ExtensionClassName = "AAA_ClassName")]
 [assembly: ExternalEnumExtensions(Enum = typeof(ConsoleKey))]
