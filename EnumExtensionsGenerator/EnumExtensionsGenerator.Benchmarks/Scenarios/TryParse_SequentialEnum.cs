@@ -7,6 +7,8 @@ namespace EnumExtensionsGenerator.Benchmarks.Scenarios;
 [ShortRunJob]
 public class TryParse_SequentialEnum
 {
+    private static string Value = "Friday";
+    
     [GlobalSetup]
     public void Setup()
     {
@@ -18,17 +20,17 @@ public class TryParse_SequentialEnum
     
     [Benchmark(Baseline = true)]
     public bool DotNet()
-        => Enum.TryParse<SequentialEnum>("Friday", out _);
+        => Enum.TryParse<SequentialEnum>(Value, out _);
 
     [Benchmark]
     public bool EnumsNet()
-        => Enums.TryParse<SequentialEnum>("Friday", out _);
+        => Enums.TryParse<SequentialEnum>(Value, out _);
 
     [Benchmark]
     public bool FastEnum()
-        => FastEnumUtility.FastEnum.TryParse<SequentialEnum>("Friday", out _);
+        => FastEnumUtility.FastEnum.TryParse<SequentialEnum>(Value, out _);
     
     [Benchmark]
     public bool EnumExtensions()
-        => SequentialEnumExtensions.TryParse("Friday", out _);
+        => SequentialEnumExtensions.TryParse(Value, out _);
 }

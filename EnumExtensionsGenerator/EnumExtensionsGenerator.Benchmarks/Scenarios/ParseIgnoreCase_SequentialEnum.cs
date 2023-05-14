@@ -7,6 +7,8 @@ namespace EnumExtensionsGenerator.Benchmarks.Scenarios;
 [ShortRunJob]
 public class ParseIgnoreCase_SequentialEnum
 {
+    private static string Value = "FRIDAY";
+    
     [GlobalSetup]
     public void Setup()
     {
@@ -18,17 +20,17 @@ public class ParseIgnoreCase_SequentialEnum
     
     [Benchmark(Baseline = true)]
     public SequentialEnum DotNet()
-        => Enum.Parse<SequentialEnum>("FRIDAY", true);
+        => Enum.Parse<SequentialEnum>(Value, true);
 
     [Benchmark]
     public SequentialEnum EnumsNet()
-        => Enums.Parse<SequentialEnum>("FRIDAY", true);
+        => Enums.Parse<SequentialEnum>(Value, true);
 
     [Benchmark]
     public SequentialEnum FastEnum()
-        => FastEnumUtility.FastEnum.Parse<SequentialEnum>("FRIDAY", true);
+        => FastEnumUtility.FastEnum.Parse<SequentialEnum>(Value, true);
     
     [Benchmark]
     public SequentialEnum EnumExtensions()
-        => SequentialEnumExtensions.ParseIgnoreCase("FRIDAY");
+        => SequentialEnumExtensions.ParseIgnoreCase(Value);
 }
