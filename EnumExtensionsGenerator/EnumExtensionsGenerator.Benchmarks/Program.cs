@@ -10,6 +10,7 @@ var switcher = new BenchmarkSwitcher(new[]
     typeof(Names_SequentialEnum),
     typeof(Values_SequentialEnum),
     typeof(Parse_SequentialEnum),
+    typeof(ParseIgnoreCase_SequentialEnum),
 });
 
 switcher.Run(args);
