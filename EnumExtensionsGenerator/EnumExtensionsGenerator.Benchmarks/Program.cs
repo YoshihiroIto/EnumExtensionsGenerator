@@ -11,6 +11,7 @@ var switcher = new BenchmarkSwitcher(new[]
     typeof(Values_SequentialEnum),
     typeof(Parse_SequentialEnum),
     typeof(ParseIgnoreCase_SequentialEnum),
+    typeof(TryParse_SequentialEnum),
 });
 
 switcher.Run(args);
