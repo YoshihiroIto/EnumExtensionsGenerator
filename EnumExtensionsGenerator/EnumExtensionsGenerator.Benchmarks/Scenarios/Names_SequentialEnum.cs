@@ -17,18 +17,18 @@ public class Names_SequentialEnum
     }
     
     [Benchmark(Baseline = true)]
-    public object DotNet()
+    public IReadOnlyList<string> DotNet()
         => Enum.GetNames<SequentialEnum>();
 
     [Benchmark]
-    public object EnumsNet()
+    public IReadOnlyList<string> EnumsNet()
         => Enums.GetNames<SequentialEnum>();
 
     [Benchmark]
-    public object FastEnum()
+    public IReadOnlyList<string> FastEnum()
         => FastEnumUtility.FastEnum.GetNames<SequentialEnum>();
     
     [Benchmark]
-    public object EnumExtensions()
+    public IReadOnlyList<string> EnumExtensions()
         => SequentialEnumExtensions.Names;
 }

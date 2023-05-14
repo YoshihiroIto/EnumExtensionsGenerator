@@ -5,7 +5,7 @@ namespace EnumExtensionsGenerator.Benchmarks.Scenarios;
 
 [MemoryDiagnoser]
 [ShortRunJob]
-public class Values_SequentialEnum
+public class Parse_SequentialEnum
 {
     [GlobalSetup]
     public void Setup()
@@ -17,18 +17,18 @@ public class Values_SequentialEnum
     }
     
     [Benchmark(Baseline = true)]
-    public IReadOnlyList<SequentialEnum> DotNet()
-        => Enum.GetValues<SequentialEnum>();
+    public SequentialEnum DotNet()
+        => Enum.Parse<SequentialEnum>("Friday");
 
     [Benchmark]
-    public IReadOnlyList<SequentialEnum> EnumsNet()
-        => Enums.GetValues<SequentialEnum>();
+    public SequentialEnum EnumsNet()
+        => Enums.Parse<SequentialEnum>("Friday");
 
     [Benchmark]
-    public IReadOnlyList<SequentialEnum> FastEnum()
-        => FastEnumUtility.FastEnum.GetValues<SequentialEnum>();
+    public SequentialEnum FastEnum()
+        => FastEnumUtility.FastEnum.Parse<SequentialEnum>("Friday");
     
     [Benchmark]
-    public IReadOnlyList<SequentialEnum> EnumExtensions()
-        => SequentialEnumExtensions.Values;
+    public SequentialEnum EnumExtensions()
+        => SequentialEnumExtensions.Parse("Friday");
 }

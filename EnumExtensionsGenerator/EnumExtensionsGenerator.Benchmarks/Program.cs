@@ -8,9 +8,8 @@ var switcher = new BenchmarkSwitcher(new[]
     typeof(IsDefined_SequentialEnum),
     typeof(IsDefined_UnsequentialEnum),
     typeof(Names_SequentialEnum),
-    typeof(Names_UnsequentialEnum),
     typeof(Values_SequentialEnum),
-    typeof(Values_UnsequentialEnum),
+    typeof(Parse_SequentialEnum),
 });
 
 switcher.Run(args);
