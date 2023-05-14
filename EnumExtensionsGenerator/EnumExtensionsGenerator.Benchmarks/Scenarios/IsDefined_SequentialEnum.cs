@@ -7,7 +7,7 @@ namespace EnumExtensionsGenerator.Benchmarks.Scenarios;
 [ShortRunJob]
 public class IsDefined_SequentialEnum
 {
-    private static SequentialEnum Value = SequentialEnum.K;
+    private static SequentialEnum Value = SequentialEnum.Friday;
     
     [GlobalSetup]
     public void Setup()

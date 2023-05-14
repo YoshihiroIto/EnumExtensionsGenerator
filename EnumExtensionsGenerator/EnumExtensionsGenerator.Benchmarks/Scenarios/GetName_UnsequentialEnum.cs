@@ -7,7 +7,7 @@ namespace EnumExtensionsGenerator.Benchmarks.Scenarios;
 [ShortRunJob]
 public class GetName_UnsequentialEnum
 {
-    private static UnsequentialEnum Value = UnsequentialEnum.K;
+    private static UnsequentialEnum Value = UnsequentialEnum.Friday;
     
     [GlobalSetup]
     public void Setup()

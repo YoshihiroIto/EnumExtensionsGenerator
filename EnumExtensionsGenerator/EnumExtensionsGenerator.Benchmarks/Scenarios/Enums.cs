@@ -3,31 +3,23 @@
 [EnumExtensions]
 public enum SequentialEnum
 {
-    A,
-    B,
-    C,
-    D,
-    E,
-    F,
-    G,
-    H,
-    I,
-    J,
-    K,
+    Sunday,
+    Monday,
+    Tuesday,
+    Wednesday,
+    Thursday,
+    Friday,
+    Saturday
 }
 
 [EnumExtensions]
 public enum UnsequentialEnum
 {
-    A = 10,
-    B = 20,
-    C = 30,
-    D = 40,
-    E = 50,
-    F = 60,
-    G = 70,
-    H = 80,
-    I = 90,
-    J = 100,
-    K = 110,
+    Sunday = 10,
+    Monday = 20,
+    Tuesday = 30,
+    Wednesday = 40,
+    Thursday = 50,
+    Friday = 60,
+    Saturday = 70
 }
